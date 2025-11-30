@@ -16,7 +16,7 @@
     <!-- Navbar -->
     <nav>
       <ul>
-         <li><a href="../index.html">Home</a></li>
+        <li><a href="../index.html">Home</a></li>
         <li><a href="shop.html">Shop</a></li>
         <li><a href="aboutus.html">About Us</a></li>
         <li><a href="contactus.html">Contact</a></li>
@@ -29,8 +29,51 @@
     <h2>Contact Us</h2>
 
     <p class="intro">Hi, cutie! We'd love to hear from you! ✨</p>
-    <p>Do you have any questions or concerns? Please send us a message and we will reply within 1 business day.  
-      We warmly welcome feedback for improving our store & service. We love getting to know our fabulous customers — your comments are important to us!</p>
+    <p>
+      Have questions or concerns? Please send us a message and we will reply within 
+      1 business day. We appreciate your feedback and love connecting with our amazing customers!
+    </p>
+
+    <!-- ★★★★★ CONTACT FORM START ★★★★★ -->
+    <section class="contact-form">
+      <h3>Send Us a Message</h3>
+      <p class="form-instructions">
+        Please fill out all fields marked with (*). Make sure your information is correct before submitting.
+      </p>
+
+      <form id="contactForm" novalidate>
+        
+        <!-- Full Name -->
+        <label for="fullname">Full Name *</label>
+        <input type="text" id="fullname" name="fullname" required>
+        <span class="error" id="nameError"></span>
+
+        <!-- Email -->
+        <label for="email">Email Address *</label>
+        <input type="email" id="email" name="email" required>
+        <span class="error" id="emailError"></span>
+
+        <!-- Contact Method -->
+        <label for="contactMethod">Preferred Contact Method *</label>
+        <select id="contactMethod" name="contactMethod" required>
+          <option value="">-- Please Select --</option>
+          <option value="email">Email</option>
+          <option value="phone">Phone</option>
+          <option value="none">None</option>
+        </select>
+        <span class="error" id="methodError"></span>
+
+        <!-- Message -->
+        <label for="message">Message *</label>
+        <textarea id="message" name="message" rows="5" required></textarea>
+        <span class="error" id="messageError"></span>
+
+        <button type="submit">Send Message</button>
+      </form>
+
+      <p id="successMessage" class="success"></p>
+    </section>
+    <!-- ★★★★★ CONTACT FORM END ★★★★★ -->
 
     <section class="contact-info">
       <h3>How do you contact us?</h3>
@@ -51,21 +94,84 @@
       <h5>Frequently Asked Questions</h5>
       <ol>
         <li><b>Where's my order?</b></li>
-        <p>It’s on its way! Orders can take anywhere from 1–2 weeks to arrive. Most arrive sooner, but if delayed, please notify us.</p>
+        <p>It’s on its way! Orders can take 1–2 weeks to arrive.</p>
 
         <li><b>What are your refund/return policies?</b></li>
-        <p>If your item arrives damaged, missing, or incorrect, we’ll gladly offer a full refund or replacement.</p>
+        <p>We offer refunds or replacements for damaged or incorrect items.</p>
 
         <li><b>Can I cancel my order?</b></li>
-        <p>Yes! You can cancel your order within 1 hour after placing it since we ship packages the same day.</p>
+        <p>You may cancel within 1 hour after placing an order.</p>
       </ol>
     </section>
 
-    <p class="thanks">Thank you for your inquiries! We’ll get back to you as soon as possible! 🌟</p>
+    <p class="thanks">Thank you for your inquiries! We'll get back to you as soon as possible! 🌟</p>
   </main>
 
   <footer>
     © 2025 Anime Haven. All Rights Reserved.
   </footer>
+
+  <!-- ★★★★★ JAVASCRIPT VALIDATION ★★★★★ -->
+  <script>
+    document.getElementById("contactForm").addEventListener("submit", function(e) {
+      e.preventDefault();
+
+      let valid = true;
+
+      // Inputs
+      const nameField = document.getElementById("fullname");
+      const emailField = document.getElementById("email");
+      const methodField = document.getElementById("contactMethod");
+      const messageField = document.getElementById("message");
+
+      // Errors
+      const nameError = document.getElementById("nameError");
+      const emailError = document.getElementById("emailError");
+      const methodError = document.getElementById("methodError");
+      const messageError = document.getElementById("messageError");
+
+      // Clear previous errors
+      nameError.textContent = "";
+      emailError.textContent = "";
+      methodError.textContent = "";
+      messageError.textContent = "";
+
+      // Full Name Validation
+      if (nameField.value.trim() === "") {
+        nameError.textContent = "Please enter your full name.";
+        valid = false;
+      }
+
+      // Email Validation (JavaScript requirement)
+      const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+      if (!emailPattern.test(emailField.value)) {
+        emailError.textContent = "Please enter a valid email address.";
+        valid = false;
+      }
+
+      // Contact Method Validation
+      if (methodField.value === "") {
+        methodError.textContent = "Please select a contact method.";
+        valid = false;
+      }
+
+      // Message Validation
+      if (messageField.value.trim() === "") {
+        messageError.textContent = "Please enter your message.";
+        valid = false;
+      }
+
+      // If valid
+      if (valid) {
+        document.getElementById("successMessage").textContent =
+          "Thank you! Your message has been sent successfully. 💖";
+        document.getElementById("contactForm").reset();
+      }
+    });
+  </script>
+
 </body>
 </html>
+
+
+
